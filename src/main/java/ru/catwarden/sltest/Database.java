@@ -1,8 +1,8 @@
 package ru.catwarden.sltest;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     private Config config;
@@ -10,7 +10,7 @@ public class Database {
     private String dbuser;
     private String dbpassword;
 
-    public Database(Config config){
+    public Database(Config config) {
         this.config = config;
         this.dburl = config.getDatabaseUrl();
         this.dbuser = config.getDatabaseUser();
@@ -22,5 +22,26 @@ public class Database {
         return DriverManager.getConnection(this.dburl, this.dbuser, this.dbpassword);
 
     }
-// testtest
+
+    public List<Birthday> getAllBirthdays() {
+        String query = "SELECT name, birthday FROM birthday";
+        List<Birthday> list = new ArrayList<Birthday>();
+
+        try(Connection conn = connectToDatabase();
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();) {
+
+            while(rs.next()){
+                list.add(new Birthday(
+                        rs.getString("name"),
+                        rs.getDate("birthday")
+                ));
+            }
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return list;
+    }
 }

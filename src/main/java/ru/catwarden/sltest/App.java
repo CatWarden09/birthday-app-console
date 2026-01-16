@@ -14,6 +14,12 @@ public class App {
 
         Console console = new Console(sc, controller);
 
-        console.show_ui();
+        // console state on program launch
+        console.printSeparator();
+        console.printIntro();
+        console.showCurrentBirthdays();
+        console.showUpcomingBirthdays();
+        console.showUi();
+
     }
 }

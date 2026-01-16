@@ -1,5 +1,6 @@
 package ru.catwarden.sltest;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Console {
@@ -12,13 +13,11 @@ public class Console {
 
     }
 
-    public void show_ui(){
+    public void showUi(){
         boolean running = true;
 
         while(running) {
-            System.out.println("Поздравлятор 1.0");
-            show_current_birthday();
-            show_upcoming_birthday();
+            printSeparator();
             System.out.println("Введите команду:");
             System.out.println("1. Показать текущие и ближайшие ДР");
             System.out.println("2. Показать все ДР");
@@ -30,6 +29,13 @@ public class Console {
             String cmd = scanner.nextLine();
 
             switch (cmd){
+                case "1":
+                    showCurrentBirthdays();
+                    showUpcomingBirthdays();
+                    break;
+                case "2":
+                    showAllBirthdays();
+                    break;
                 case "0":
                     running = false;
                     break;
@@ -39,12 +45,31 @@ public class Console {
     }
 
 
-    public void show_current_birthday(){
+    public void showCurrentBirthdays(){
+
         System.out.println("Список текущих ДР:");
     }
 
-    public void show_upcoming_birthday(){
-        System.out.println("Список ближайших ДР:");
+    public void showUpcomingBirthdays(){
 
+        System.out.println("Список ближайших ДР:");
+    }
+    public void showAllBirthdays(){
+        List<Birthday> list = controller.getAllBirthdayList();
+
+        printSeparator();
+        System.out.println("Список всех ДР:");
+        for(Birthday day:list){
+            System.out.print(day.getName() + " ");
+            System.out.println(day.getDate());
+        }
+    }
+
+    public void printSeparator(){
+        System.out.println("________________");
+    }
+
+    public void printIntro(){
+        System.out.println("Поздравлятор 3000");
     }
 }

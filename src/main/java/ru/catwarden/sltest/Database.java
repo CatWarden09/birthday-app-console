@@ -25,11 +25,11 @@ public class Database {
 
     public List<Birthday> getAllBirthdays() {
         String query = "SELECT id, name, birthday FROM birthday";
-        List<Birthday> list = new ArrayList<Birthday>();
+        List<Birthday> list = new ArrayList<>();
 
         try(Connection conn = connectToDatabase();
             PreparedStatement statement = conn.prepareStatement(query);
-            ResultSet rs = statement.executeQuery();) {
+            ResultSet rs = statement.executeQuery()) {
 
             while(rs.next()){
                 Birthday birthday = new Birthday(rs.getString("name"),rs.getDate("birthday"));
@@ -49,7 +49,7 @@ public class Database {
 
 
         try(Connection conn = connectToDatabase();
-        PreparedStatement statement = conn.prepareStatement(query);
+        PreparedStatement statement = conn.prepareStatement(query)
         ) { statement.setString(1, name);
             statement.setDate(2, date);
             statement.executeUpdate();
@@ -58,6 +58,19 @@ public class Database {
             exception.printStackTrace();
         }
 
+
+    }
+
+    public void deleteBirthday(int id){
+        String query = "DELETE from birthday WHERE id = ?";
+
+        try(Connection conn = connectToDatabase();
+        PreparedStatement statement = conn.prepareStatement(query)){
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch(SQLException exception){
+            exception.printStackTrace();
+        }
 
     }
 }

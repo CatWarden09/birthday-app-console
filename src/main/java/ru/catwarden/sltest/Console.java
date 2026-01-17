@@ -95,7 +95,6 @@ public class Console {
 
             if(y>2025 || y<1920){
                 System.out.println("Некорректный год!");
-                continue;
             }
             else {
                 break;
@@ -123,7 +122,6 @@ public class Console {
 
             if (m>12 || m<1) {
                 System.out.println("Некорректный месяц!");
-                continue;
 
             } else {
                 break;
@@ -171,12 +169,27 @@ public class Console {
 
 
             int index = scanner.nextInt();
+            scanner.nextLine();
             int index_checked = controller.getBirthdayId(index, list);
             if (index_checked == -1) {
                 System.out.println("Указан неверный номер ДР!");
             } else {
-                System.out.println("Указан верный номер ДР!");
-                break;
+                System.out.println("Вы уверены, что хотите удалить ДР?");
+                System.out.println("1. Удалить");
+                System.out.println("2. Отмена");
+                String cmd = scanner.nextLine();
+                switch (cmd){
+                    case "1":
+                        controller.deleteBirthday(index_checked);
+                        System.out.println("ДР удалён!");
+                        break;
+                    case "2":
+                        break;
+                    default:
+                        System.out.println("Некорректная команда!");
+                        break;
+                } break;
+
             }
         }
     }

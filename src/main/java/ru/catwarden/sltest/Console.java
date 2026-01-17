@@ -56,8 +56,15 @@ public class Console {
 
 
     public void showCurrentBirthdays(){
+        List<BirthdayWithIndex> list = controller.getTodayBirthdays();
 
+        printSeparator();
         System.out.println("Список текущих ДР:");
+        for(BirthdayWithIndex birthday :list){
+            System.out.print(birthday.getIndex() + "." + " ");
+            System.out.print(birthday.getName() + " сегодня празднует своё ");
+            System.out.println(birthday.getAge() + "-летие!");
+        }
     }
 
     public void showUpcomingBirthdays(){

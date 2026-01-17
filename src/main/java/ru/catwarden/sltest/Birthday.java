@@ -8,8 +8,12 @@ public class Birthday {
     private String name;
     private Date date;
 
-    public Birthday(String name, Date date){
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public void setDate(Date date) {
         this.date = date;
     }
 

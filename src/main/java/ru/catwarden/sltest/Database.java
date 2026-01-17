@@ -3,6 +3,7 @@ package ru.catwarden.sltest;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Database {
     private Config config;
@@ -32,8 +33,10 @@ public class Database {
             ResultSet rs = statement.executeQuery()) {
 
             while(rs.next()){
-                Birthday birthday = new Birthday(rs.getString("name"),rs.getDate("birthday"));
+                Birthday birthday = new Birthday();
                 birthday.setId(rs.getInt("id"));
+                birthday.setName(rs.getString("name"));
+                birthday.setDate(rs.getDate("birthday"));
                 list.add(birthday);
             }
 
@@ -85,5 +88,30 @@ public class Database {
         } catch (SQLException exception){
             exception.printStackTrace();
         }
+    }
+
+    public List<Birthday> getTodayBirthdays(int month, int day){
+        List<Birthday> list = new ArrayList<>();
+
+        String query = "SELECT name, birthday FROM birthday WHERE EXTRACT(MONTH FROM birthday) = ? AND EXTRACT(DAY FROM birthday) = ?";
+
+        try(Connection conn = connectToDatabase();
+        PreparedStatement statement = conn.prepareStatement(query);){
+            statement.setInt(1, month);
+            statement.setInt(2, day);
+            try(ResultSet rs = statement.executeQuery()) {
+                while (rs.next()) {
+                    Birthday birthday = new Birthday();
+                    birthday.setName(rs.getString("name"));
+                    birthday.setDate(rs.getDate("birthday"));
+
+                    list.add(birthday);
+                }
+            }
+
+        } catch (SQLException exception){
+            exception.printStackTrace();
+        }
+        return list;
     }
 }

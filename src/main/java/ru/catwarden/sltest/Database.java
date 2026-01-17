@@ -24,7 +24,7 @@ public class Database {
     }
 
     public List<Birthday> getAllBirthdays() {
-        String query = "SELECT name, birthday FROM birthday";
+        String query = "SELECT id, name, birthday FROM birthday";
         List<Birthday> list = new ArrayList<Birthday>();
 
         try(Connection conn = connectToDatabase();
@@ -32,10 +32,9 @@ public class Database {
             ResultSet rs = statement.executeQuery();) {
 
             while(rs.next()){
-                list.add(new Birthday(
-                        rs.getString("name"),
-                        rs.getDate("birthday")
-                ));
+                Birthday birthday = new Birthday(rs.getString("name"),rs.getDate("birthday"));
+                birthday.setId(rs.getInt("id"));
+                list.add(birthday);
             }
 
         } catch (SQLException exception) {

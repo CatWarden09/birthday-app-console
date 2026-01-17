@@ -19,6 +19,7 @@ public class Controller {
 
         for(int i =0; i<list.size();i++){
             list_parsed.add(new BirthdayWithIndex(
+                    list.get(i).getId(),
                     i+1,
                     list.get(i).getName(),
                     list.get(i).getDate()

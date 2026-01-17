@@ -42,6 +42,9 @@ public class Console {
                 case "4":
                     deleteBirthday();
                     break;
+                case "5":
+                    editBirthday();
+                    break;
                 case "0":
                     return;
                 default:
@@ -145,7 +148,14 @@ public class Console {
             if (index_checked == -1) {
                 System.out.println("Указан неверный номер ДР!");
             } else{
-                return;
+                List<String> date_list = validateUserInput();
+
+                String year = date_list.get(0);
+                String month = date_list.get(1);
+                String day = date_list.get(2);
+
+                controller.editBirthday(index_checked, year, month, day);
+            break;
             }
         }
     }

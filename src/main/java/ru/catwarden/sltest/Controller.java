@@ -30,13 +30,9 @@ public class Controller {
     }
 
     public void setNewBirthday(String name, String year, String month, String day){
-
-
         Date date_parsed = Date.valueOf(year + "-" + month + "-" + day);
 
-        Birthday birthday = new Birthday(name, date_parsed);
-
-        db.setNewBirthday(birthday.getName(), birthday.getDate());
+        db.setNewBirthday(name, date_parsed);
 
     }
 
@@ -52,5 +48,12 @@ public class Controller {
 
     public void deleteBirthday(int id){
         db.deleteBirthday(id);
+    }
+
+    public void editBirthday(int id, String year, String month, String day){
+        Date date_parsed = Date.valueOf(year + "-" + month + "-" + day);
+
+        db.editBirthday(id, date_parsed);
+
     }
 }

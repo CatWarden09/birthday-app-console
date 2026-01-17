@@ -73,4 +73,17 @@ public class Database {
         }
 
     }
+
+    public void editBirthday(int id, Date date){
+        String query = "UPDATE birthday SET birthday = ? WHERE id = ?";
+
+        try(Connection conn = connectToDatabase();
+        PreparedStatement statement = conn.prepareStatement(query)){
+            statement.setDate(1, date);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        } catch (SQLException exception){
+            exception.printStackTrace();
+        }
+    }
 }

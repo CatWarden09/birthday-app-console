@@ -14,9 +14,8 @@ public class Console {
     }
 
     public void showUi(){
-        boolean running = true;
 
-        while(running) {
+        while(true) {
             printSeparator();
             System.out.println("Введите команду:");
             System.out.println("1. Показать текущие и ближайшие ДР");
@@ -32,16 +31,20 @@ public class Console {
                 case "1":
                     showCurrentBirthdays();
                     showUpcomingBirthdays();
-                    continue;
+                    break;
                 case "2":
                     showAllBirthdays();
-                    continue;
+                    break;
                 case "3":
                     setNewBirthday();
-                    continue;
-                case "0":
-                    running = false;
                     break;
+                case "4":
+                    deleteBirthday();
+                    break;
+                case "0":
+                    return;
+                default:
+                    System.out.println("Некорректная команда!");
 
             }
         }
@@ -154,7 +157,29 @@ public class Console {
         controller.setNewBirthday(name, year, month, day);
     }
 
+    public void deleteBirthday(){
+        while (true) {
+            printSeparator();
+            System.out.println("Выберите ДР для удаления:");
+            List<BirthdayWithIndex> list = controller.getAllBirthdayList();
 
+            for (BirthdayWithIndex birthday : list) {
+                System.out.print(birthday.getIndex() + "." + " ");
+                System.out.print(birthday.getName() + " ");
+                System.out.println(birthday.getDate());
+            }
+
+
+            int index = scanner.nextInt();
+            int index_checked = controller.getBirthdayId(index, list);
+            if (index_checked == -1) {
+                System.out.println("Указан неверный номер ДР!");
+            } else {
+                System.out.println("Указан верный номер ДР!");
+                break;
+            }
+        }
+    }
 
     public void printSeparator(){
         System.out.println("________________");

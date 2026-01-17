@@ -39,4 +39,14 @@ public class Controller {
         db.setNewBirthday(birthday.getName(), birthday.getDate());
 
     }
+
+    public int getBirthdayId(int index, List<BirthdayWithIndex> list){
+        int id = -1;
+        for(BirthdayWithIndex birthday:list){
+            if(birthday.getId() == index){
+                id = index;
+            }
+        }
+        return id;
+    }
 }

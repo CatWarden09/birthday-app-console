@@ -60,16 +60,34 @@ public class Console {
 
         printSeparator();
         System.out.println("Список текущих ДР:");
-        for(BirthdayWithIndex birthday :list){
-            System.out.print(birthday.getIndex() + "." + " ");
-            System.out.print(birthday.getName() + " сегодня празднует своё ");
-            System.out.println(birthday.getAge() + "-летие!");
+
+        if(!list.isEmpty()) {
+            for (BirthdayWithIndex birthday : list) {
+                System.out.print(birthday.getIndex() + "." + " ");
+                System.out.print(birthday.getName() + " сегодня празднует своё ");
+                System.out.println(birthday.getAge() + "-летие!");
+            }
+        } else{
+            System.out.println("Сегодня ДР нет!");
         }
     }
 
     public void showUpcomingBirthdays(){
+        List<BirthdayWithIndex> list = controller.getUpcomingBirthdays();
 
+        printSeparator();
         System.out.println("Список ближайших ДР:");
+
+        if(!list.isEmpty()) {
+            for (BirthdayWithIndex birthday : list) {
+                System.out.print(birthday.getIndex() + "." + " ");
+                System.out.print(birthday.getName() + " ");
+                System.out.println(birthday.getDate());
+            }
+        } else{
+            System.out.println("В ближайшую неделю ДР нет!");
+        }
+
     }
     public void showAllBirthdays(){
         List<BirthdayWithIndex> list = controller.getAllBirthdayList();

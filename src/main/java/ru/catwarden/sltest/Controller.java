@@ -31,10 +31,9 @@ public class Controller {
         return list_parsed;
     }
 
-    public void setNewBirthday(String name, String year, String month, String day){
-        Date date_parsed = Date.valueOf(year + "-" + month + "-" + day);
+    public void setNewBirthday(String name, Date date){
 
-        db.setNewBirthday(name, date_parsed);
+        db.setNewBirthday(name, date);
 
     }
 
@@ -52,10 +51,8 @@ public class Controller {
         db.deleteBirthday(id);
     }
 
-    public void editBirthday(int id, String year, String month, String day){
-        Date date_parsed = Date.valueOf(year + "-" + month + "-" + day);
-
-        db.editBirthday(id, date_parsed);
+    public void editBirthday(int id, Date date, String name){
+        db.editBirthday(id, date, name);
 
     }
 
@@ -77,7 +74,6 @@ public class Controller {
 
             int year_parsed = list.get(i).getDate().toLocalDate().getYear();
             birthday.setAge(current_year-year_parsed);
-            System.out.println(birthday.getAge());
 
             list_parsed.add(birthday);
         }

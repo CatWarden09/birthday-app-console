@@ -77,13 +77,14 @@ public class Database {
 
     }
 
-    public void editBirthday(int id, Date date){
-        String query = "UPDATE birthday SET birthday = ? WHERE id = ?";
+    public void editBirthday(int id, Date date, String name){
+        String query = "UPDATE birthday SET name = ?, birthday = ? WHERE id = ?";
 
         try(Connection conn = connectToDatabase();
         PreparedStatement statement = conn.prepareStatement(query)){
-            statement.setDate(1, date);
-            statement.setInt(2, id);
+            statement.setString(1, name);
+            statement.setDate(2, date);
+            statement.setInt(3, id);
             statement.executeUpdate();
         } catch (SQLException exception){
             exception.printStackTrace();

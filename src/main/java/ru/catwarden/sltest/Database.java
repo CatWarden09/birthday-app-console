@@ -17,6 +17,23 @@ public class Database {
         this.dbuser = config.getDatabaseUser();
         this.dbpassword = config.getDatabasePassword();
 
+        initializeDatabase();
+
+    }
+
+    public void initializeDatabase(){
+        String query = "CREATE TABLE IF NOT EXISTS birthday ("+
+                "id SERIAL PRIMARY KEY, " +
+                "name VARCHAR(50) NOT NULL, " +
+                "birthday DATE NOT NULL " +
+                ");";
+
+        try(Connection conn = connectToDatabase();
+            PreparedStatement statement = conn.prepareStatement(query)){
+            statement.executeUpdate();
+        } catch (SQLException exception){
+            exception.printStackTrace();
+        }
     }
 
     public Connection connectToDatabase() throws SQLException {

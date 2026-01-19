@@ -1,6 +1,6 @@
 package ru.catwarden.sltest;
 import java.util.Scanner;
-
+// TODO add birthdays sorting, add skipped birthdays display
 public class App {
 
     public static void main( String[] args ){

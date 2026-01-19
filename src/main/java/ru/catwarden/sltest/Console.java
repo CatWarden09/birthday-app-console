@@ -94,6 +94,11 @@
         public void showAllBirthdays(){
             List<BirthdayWithIndex> list = controller.getAllBirthdayList();
 
+            if(list.isEmpty()){
+                System.out.println("ДР не найдены!");
+                return;
+            }
+
             printSeparator();
             System.out.println("Список всех ДР:");
             for(BirthdayWithIndex birthday :list){
@@ -117,15 +122,22 @@
 
         public void deleteBirthday(){
             while (true) {
+                List<BirthdayWithIndex> list = controller.getAllBirthdayList();
+
+                if(list.isEmpty()) {
+                    System.out.println("ДР не найдены!");
+                    break;
+                }
+
                 printSeparator();
                 System.out.println("Выберите ДР для удаления:");
-                List<BirthdayWithIndex> list = controller.getAllBirthdayList();
 
                 for (BirthdayWithIndex birthday : list) {
                     System.out.print(birthday.getIndex() + "." + " ");
                     System.out.print(birthday.getName() + " ");
                     System.out.println(birthday.getDate());
                 }
+
 
                 try{
                     int index = scanner.nextInt();
@@ -163,9 +175,16 @@
 
         public void editBirthday() {
             while (true) {
+
+                List<BirthdayWithIndex> list = controller.getAllBirthdayList();
+
+                if(list.isEmpty()) {
+                    System.out.println("ДР не найдены!");
+                    break;
+                }
+
                 printSeparator();
                 System.out.println("Выберите ДР для редактирования:");
-                List<BirthdayWithIndex> list = controller.getAllBirthdayList();
 
                 for (BirthdayWithIndex birthday : list) {
                     System.out.print(birthday.getIndex() + "." + " ");

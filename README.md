@@ -34,7 +34,7 @@ db.user=<имя_пользователя> (по умолчанию postgres)
 db.password=<пароль>
 ```
 
-Пример файла config.properties:
+Пример содержимого файла config.properties:
 ```
 db.url=jdbc:postgresql://localhost:5432/birthdays
 db.user=postgres
